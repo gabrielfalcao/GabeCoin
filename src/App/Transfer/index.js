@@ -27,24 +27,7 @@ export default function Transfer() {
     }
   }
   if (!web3) {
-    return (
-      <Container fluid className="text-center">
-        <Row>
-          <Col md={5} />
-          <Col md={2}>
-            <Spinner animation="grow" variant="info" />;
-          </Col>
-          <Col md={5} />
-        </Row>
-        <Row>
-          <Col md={2} />
-          <Col md={8}>
-            <h1>Waiting for metamask</h1>
-          </Col>
-          <Col md={2} />
-        </Row>
-      </Container>
-    );
+    return null;
   }
   return (
     <Container>

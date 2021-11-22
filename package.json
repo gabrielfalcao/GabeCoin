@@ -16,6 +16,7 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "solc": "^0.4.26",
+    "truffle-hdwallet-provider": "^1.0.17",
     "web-vitals": "^1.0.1",
     "web3": "^1.6.1"
   },
@@ -26,10 +27,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

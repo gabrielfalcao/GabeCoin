@@ -3,7 +3,8 @@ import newICO from "../../ethereum/build/ICO.json";
 import Web3 from "web3";
 
 export const Web3Context = createContext();
-
+export const contractAddress = "0x2F9834ED2ac1d3e5573128d88e44B00c84604F7C";
+//const old = "0x251F2b3De50cBcD453c33F77599cf692927eEef8";
 export function Web3Provider({ children }) {
   const web3 = useWeb3Provider();
   return <Web3Context.Provider value={web3}>{children}</Web3Context.Provider>;
@@ -12,6 +13,21 @@ export function Web3Provider({ children }) {
 export function useWeb3() {
   return useContext(Web3Context);
 }
+export function getInfuraProvider() {
+  return new Web3.providers.HttpProvider(
+    "https://rinkeby.infura.io/v3/c4cc858e78e6454ea92e35841e5eb91b"
+  );
+}
+
+export function getProvider() {
+  if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
+    return window.ethereum; // https://medium.com/metamask/no-longer-injecting-web3-js-4a899ad6e59e
+  }
+  return new Web3.providers.HttpProvider(
+    "https://rinkeby.infura.io/v3/c4cc858e78e6454ea92e35841e5eb91b"
+  );
+}
+
 //https://medium.com/valist/how-to-connect-web3-js-to-metamask-in-2020-fee2b2edf58a
 export function useWeb3Provider() {
   const [web3, setWeb3] = useState(undefined);
@@ -37,13 +53,10 @@ export function useWeb3Provider() {
     ) {
       console.log("MetaMask is installed");
       window.ethereum.send("eth_requestAccounts").then(() => {
-        const w3 = new Web3(window.ethereum); // https://medium.com/metamask/no-longer-injecting-web3-js-4a899ad6e59e
+        const w3 = new Web3(getProvider());
         setWeb3(w3);
         setInstance(
-          new w3.eth.Contract(
-            JSON.parse(newICO.interface),
-            "0x251F2b3De50cBcD453c33F77599cf692927eEef8"
-          )
+          new w3.eth.Contract(JSON.parse(newICO.interface), contractAddress)
         );
       });
     }
