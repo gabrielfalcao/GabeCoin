@@ -17,7 +17,7 @@ import { Web3Provider } from "./Web3";
 //        <Switch>
 //          <Route path="/">
 //            <Container>
-//              <h1>GangstaCoin</h1>
+//              <h1>GabeCoin</h1>
 //            </Container>
 //          </Route>
 //        </Switch>

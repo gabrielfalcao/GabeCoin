@@ -25,7 +25,7 @@ export default function TopBar() {
   return (
     <Navbar bg="success" variant="dark">
       <Container>
-        <Navbar.Brand href="/">GangstaCoin</Navbar.Brand>
+        <Navbar.Brand href="/">GabeCoin</Navbar.Brand>
         <Navbar.Toggle aria-controls="gc-navbar" />
         <Navbar.Collapse id="gc-navbar" className="justify-content-end">
           <Nav>
