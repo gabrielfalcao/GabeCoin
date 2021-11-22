@@ -13,14 +13,14 @@ export default function Buy() {
   const [purchase, setPurchase] = useState(null);
   const [error, setError] = useState(null);
   const { instance, web3, account, refresh } = useWeb3();
-  async function handleClickBuy({ eth, ogc }) {
+  async function handleClickBuy({ eth, myCoin }) {
     const value = web3.utils.toWei(`${eth}`, "ether");
     try {
       const response = await instance.methods.buyTokens().send({
         from: account,
         value
       });
-      const result = { value, eth, ogc, response };
+      const result = { value, eth, myCoin, response };
       setPurchase(result);
       refresh();
     } catch (e) {
@@ -53,7 +53,7 @@ export default function Buy() {
         {purchase ? (
           <Col className="text-center">
             <h1>Congratulations 🎉</h1>
-            <h2>You purchased {purchase.ogc} OGC</h2>
+            <h2>You purchased {purchase.myCoin} GBC</h2>
             <h3>🤑 🤑 </h3>
             <Button
               variant="success"
@@ -69,11 +69,11 @@ export default function Buy() {
         ) : (
           <>
             <Col md="4">
-              <h2>Buy OGC Tokens</h2>
+              <h2>Buy GBC Tokens</h2>
               <br />
               <h5>
                 Deposit at least 0.001 <code>ETH</code> to get 1{" "}
-                <code>OGC</code>
+                <code>GBC</code>
               </h5>
             </Col>
 

@@ -5,37 +5,37 @@ import Form from "react-bootstrap/Form";
 import { useWeb3 } from "../Web3";
 
 export const coefficient = 1000.0;
-export const ethToOgc = value => Number.parseFloat(value) * coefficient;
-export const ogcToEth = value => Number.parseFloat(value) / coefficient;
+export const ethToMyCoin = value => Number.parseFloat(value) * coefficient;
+export const myCoinToEth = value => Number.parseFloat(value) / coefficient;
 
 export default function PurchaseForm({ onClickBuy, initialValue }) {
   const { ethBalance } = useWeb3();
   const ethRef = useRef(null);
-  const ogcRef = useRef(null);
+  const myCoinRef = useRef(null);
   const [eth, setEth] = useState(Number.parseFloat(initialValue));
-  const [ogc, setOgc] = useState(ethToOgc(initialValue));
+  const [myCoin, setMyCoin] = useState(ethToMyCoin(initialValue));
 
   const hasFunds = Number.parseInt(eth) <= ethBalance;
   function handleEthChange(e) {
     const value = e.target?.value || 0;
-    ogcRef.current.value = ethToOgc(value);
+    myCoinRef.current.value = ethToMyCoin(value);
     if (value) {
       setEth(value);
-      setOgc(ethToOgc(value));
+      setMyCoin(ethToMyCoin(value));
     }
   }
-  function handleOgcChange(e) {
+  function handleMyCoinChange(e) {
     const value = e.target?.value || 0;
-    ethRef.current.value = ogcToEth(value);
+    ethRef.current.value = myCoinToEth(value);
     if (value) {
-      setOgc(value);
-      setEth(ogcToEth(value));
+      setMyCoin(value);
+      setEth(myCoinToEth(value));
     }
   }
   async function handleBuy(e) {
     e.preventDefault();
     if (hasFunds) {
-      await onClickBuy({ eth, ogc });
+      await onClickBuy({ eth, myCoin });
     }
   }
   return (
@@ -50,19 +50,19 @@ export default function PurchaseForm({ onClickBuy, initialValue }) {
           ref={ethRef}
           onChange={handleEthChange}
         />
-        <Form.Text className="text-muted">1 ETH = 100 OGC</Form.Text>
+        <Form.Text className="text-muted">1 ETH = 100 GBC</Form.Text>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="OGC">
+      <Form.Group className="mb-3" controlId="GBC">
         <Form.Label>You Receive</Form.Label>
         <Form.Control
           size="lg"
           type="number"
-          ref={ogcRef}
-          defaultValue={ogc}
-          placeholder="Enter OGC"
-          onChange={handleOgcChange}
+          ref={myCoinRef}
+          defaultValue={myCoin}
+          placeholder="Enter GBC"
+          onChange={handleMyCoinChange}
         />
-        <Form.Text className="text-muted">1 OGC = 0.001 ETH</Form.Text>
+        <Form.Text className="text-muted">1 GBC = 0.001 ETH</Form.Text>
       </Form.Group>
       <Button
         disabled={!hasFunds}
@@ -71,7 +71,7 @@ export default function PurchaseForm({ onClickBuy, initialValue }) {
         size="lg"
         onClick={handleBuy}
       >
-        Buy {ogc} Token{Number.parseFloat(ogc) !== 1 ? "s" : ""}
+        Buy {myCoin} Token{Number.parseFloat(myCoin) !== 1 ? "s" : ""}
       </Button>
     </Form>
   );

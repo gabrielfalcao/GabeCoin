@@ -12,31 +12,31 @@ import { useWeb3 } from "../Web3";
 export default function TransferenceForm({ onClickTransfer, initialValue }) {
   const { ogBalance } = useWeb3();
   const addrRef = useRef(null);
-  const ogcRef = useRef(null);
+  const myCoinRef = useRef(null);
   const [addr, setAddr] = useState(
     "0xA7F2db34258fF1f53f4eB204A9b0302F13754A83"
   );
-  const [ogc, setOgc] = useState(Number.parseInt(initialValue));
+  const [myCoin, setMyCoin] = useState(Number.parseInt(initialValue));
 
-  const hasFunds = Number.parseInt(ogc) <= ogBalance;
+  const hasFunds = Number.parseInt(myCoin) <= ogBalance;
   function handleAddrChange(e) {
     const value = e.target?.value || 0;
-    ogcRef.current.value = value;
+    myCoinRef.current.value = value;
     if (value) {
       setAddr(value);
     }
   }
-  function handleOgcChange(e) {
+  function handleMyCoinChange(e) {
     const value = e.target?.value || 0;
     addrRef.current.value = value;
     if (value) {
-      setOgc(value);
+      setMyCoin(value);
     }
   }
   async function handleTransfer(e) {
     e.preventDefault();
     if (hasFunds) {
-      await onClickTransfer({ addr, ogc });
+      await onClickTransfer({ addr, myCoin });
     }
   }
   return (
@@ -55,15 +55,15 @@ export default function TransferenceForm({ onClickTransfer, initialValue }) {
           The address of the wallet you want to transfer to
         </Form.Text>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="OGC">
+      <Form.Group className="mb-3" controlId="GBC">
         <Form.Label>Tokens</Form.Label>
         <Form.Control
           size="lg"
           type="number"
-          ref={ogcRef}
-          defaultValue={ogc}
+          ref={myCoinRef}
+          defaultValue={myCoin}
           placeholder={initialValue}
-          onChange={handleOgcChange}
+          onChange={handleMyCoinChange}
         />
       </Form.Group>
       <Row>
@@ -75,12 +75,12 @@ export default function TransferenceForm({ onClickTransfer, initialValue }) {
             size="lg"
             onClick={handleTransfer}
           >
-            Transfer {ogc} Token{Number.parseFloat(ogc) !== 1 ? "s" : ""}
+            Transfer {myCoin} Token{Number.parseFloat(myCoin) !== 1 ? "s" : ""}
           </Button>
         </Col>
         <Col className="text-end">
           <p>
-            Balance after transfer: <code>{ogBalance - ogc}</code>
+            Balance after transfer: <code>{ogBalance - myCoin}</code>
           </p>
         </Col>
       </Row>

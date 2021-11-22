@@ -14,12 +14,12 @@ export default function Transfer() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { instance, web3, account, refresh } = useWeb3();
-  async function handleClickTransfer({ addr, ogc }) {
-    console.log(`attempting to transfer ${ogc} OGC to ${addr}`);
+  async function handleClickTransfer({ addr, myCoin }) {
+    console.log(`attempting to transfer ${myCoin} GBC to ${addr}`);
 
     try {
-      const response = await instance.methods.transfer(addr, ogc).call();
-      const result = { addr, ogc, response };
+      const response = await instance.methods.transfer(addr, myCoin).call();
+      const result = { addr, myCoin, response };
       setTransference(result);
       refresh();
     } catch (e) {
@@ -35,7 +35,7 @@ export default function Transfer() {
         {transference ? (
           <Col className="text-center">
             <h1>Congratulations 🎉</h1>
-            <h2>You transferenced {transference.ogc} OGC</h2>
+            <h2>You transferenced {transference.myCoin} GBC</h2>
             <h3>🤑 🤑 </h3>
             <Button
               variant="success"
@@ -53,7 +53,7 @@ export default function Transfer() {
             <Col md="4">
               <h2>Transfer tokens</h2>
               <br />
-              <h5>Send your OGC to other addresses 💸</h5>
+              <h5>Send your GBC to other addresses 💸</h5>
             </Col>
 
             <Col md="6">
