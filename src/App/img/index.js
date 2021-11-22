@@ -23,17 +23,3 @@ export {
   mstile150x150,
   safariPinnedTab,
 };
-
-export default {
-  androidChrome192x192,
-  androidCchrome512x512,
-  appleTouchIcon,
-  coin,
-  favicon16x16,
-  favicon32x32,
-  favicon,
-  logo,
-  metamask,
-  mstile150x150,
-  safariPinnedTab,
-};

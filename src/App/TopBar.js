@@ -20,7 +20,7 @@ export default function TopBar() {
     <Navbar bg="success" variant="dark">
       <Container>
         <Navbar.Brand href="/">
-          <img src={coin} width="32" height="32" /> GabeCoin
+          <img src={coin} width="32" height="32" alt="logo" /> GabeCoin
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="gc-navbar" />
         <Navbar.Collapse id="gc-navbar" className="justify-content-end">
