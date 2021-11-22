@@ -11,6 +11,7 @@ import TransferenceForm from "./Form";
 
 export default function Transfer() {
   const [transference, setTransference] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { instance, web3, account, refresh } = useWeb3();
   async function handleClickTransfer({ addr, ogc }) {
@@ -18,7 +19,6 @@ export default function Transfer() {
 
     try {
       const response = await instance.methods.transfer(addr, ogc).call();
-
       const result = { addr, ogc, response };
       setTransference(result);
       refresh();
@@ -75,10 +75,14 @@ export default function Transfer() {
 
             <Col md="6">
               {!error ? (
-                <TransferenceForm
-                  onClickTransfer={handleClickTransfer}
-                  initialValue="1"
-                />
+                loading ? (
+                  <Spinner variant="warning" />
+                ) : (
+                  <TransferenceForm
+                    onClickTransfer={handleClickTransfer}
+                    initialValue="1"
+                  />
+                )
               ) : (
                 <Alert variant="danger">
                   <h4>Error:</h4>
