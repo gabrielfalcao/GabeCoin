@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { useWeb3 } from "./Web3";
-import fox from "./metamask.svg";
+import { metamask, coin } from "./img";
 
 export default function TopBar() {
   const {
@@ -19,7 +19,9 @@ export default function TopBar() {
   return (
     <Navbar bg="success" variant="dark">
       <Container>
-        <Navbar.Brand href="/">GabeCoin</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src={coin} width="32" height="32" /> GabeCoin
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="gc-navbar" />
         <Navbar.Collapse id="gc-navbar" className="justify-content-end">
           <Nav>
@@ -66,7 +68,12 @@ export default function TopBar() {
                 }}
               >
                 Connect to Metamask{" "}
-                <img src={fox} width="32" height="32" alt="Metamask Logo" />
+                <img
+                  src={metamask}
+                  width="32"
+                  height="32"
+                  alt="Metamask Logo"
+                />
               </Nav.Link>
             )}
           </Nav>
