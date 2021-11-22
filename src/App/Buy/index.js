@@ -5,7 +5,6 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Col from "react-bootstrap/Col";
-import TopBar from "../TopBar";
 import { useWeb3 } from "../Web3";
 import PurchaseForm from "./Form";
 
@@ -18,7 +17,7 @@ export default function Buy() {
     try {
       const response = await instance.methods.buyTokens().send({
         from: account,
-        value
+        value,
       });
       const result = { value, eth, myCoin, response };
       setPurchase(result);
@@ -58,7 +57,7 @@ export default function Buy() {
             <Button
               variant="success"
               size="lg"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 setPurchase(null);
               }}
@@ -89,7 +88,7 @@ export default function Buy() {
                   <p>{error.message}</p>
                   <Button
                     variant="danger"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       setError(null);
                     }}

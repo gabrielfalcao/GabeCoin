@@ -5,7 +5,7 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Col from "react-bootstrap/Col";
-import TopBar from "../TopBar";
+
 import { useWeb3 } from "../Web3";
 import TransferenceForm from "./Form";
 
@@ -13,10 +13,10 @@ export default function Transfer() {
   const [transference, setTransference] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { instance, web3, account, refresh } = useWeb3();
+  const { instance, web3, refresh } = useWeb3();
   async function handleClickTransfer({ addr, myCoin }) {
     console.log(`attempting to transfer ${myCoin} GBC to ${addr}`);
-
+    setLoading(true);
     try {
       const response = await instance.methods.transfer(addr, myCoin).call();
       const result = { addr, myCoin, response };
@@ -25,6 +25,7 @@ export default function Transfer() {
     } catch (e) {
       setError(e);
     }
+    setLoading(false);
   }
   if (!web3) {
     return null;
@@ -40,7 +41,7 @@ export default function Transfer() {
             <Button
               variant="success"
               size="lg"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 setTransference(null);
               }}
@@ -72,7 +73,7 @@ export default function Transfer() {
                   <p>{error.message}</p>
                   <Button
                     variant="danger"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       setError(null);
                     }}

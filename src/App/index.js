@@ -1,8 +1,6 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import TopBar from "./TopBar";
 import Buy from "./Buy";

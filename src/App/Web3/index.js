@@ -44,6 +44,7 @@ export function useWeb3Provider() {
     setEthBalance(undefined);
     setOgBalance(undefined);
     setAccounts(undefined);
+    // eslint-disable-next-line no-self-assign
     window.location.href = window.location.href;
   }
   async function connect() {
@@ -61,6 +62,7 @@ export function useWeb3Provider() {
       });
     }
   }
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     if (instance && web3) {
       const accounts = await web3.eth.getAccounts();
@@ -70,7 +72,7 @@ export function useWeb3Provider() {
       }
       const account = accounts[0];
       const ogBalance = await instance.methods.myBalance().call({
-        from: account
+        from: account,
       });
       const ethBalance = await web3.eth.getBalance(account);
 
@@ -81,21 +83,21 @@ export function useWeb3Provider() {
     } else {
       await connect();
     }
-  });
+  }, [instance, web3]);
 
   function getOgBalance() {
     if (account && instance) {
       instance.methods
         .myBalance()
         .call({
-          from: account
+          from: account,
         })
-        .then(balance => setOgBalance(balance));
+        .then((balance) => setOgBalance(balance));
     }
   }
   function getEthBalance() {
     if (account && web3) {
-      web3.eth.getBalance(account).then(balance => setEthBalance(balance));
+      web3.eth.getBalance(account).then((balance) => setEthBalance(balance));
     }
   }
   function refresh() {
@@ -117,7 +119,7 @@ export function useWeb3Provider() {
     ogBalance,
     setOgBalance,
     getOgBalance,
-    refresh
+    refresh,
   };
 }
 

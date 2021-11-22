@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -8,20 +8,14 @@ import fox from "./metamask.svg";
 
 export default function TopBar() {
   const {
-    web3,
     getOgBalance,
     getEthBalance,
     connect,
     account,
-    instance,
     disconnect,
     ogBalance,
-    ethBalance
+    ethBalance,
   } = useWeb3();
-  function handleLogin(e) {
-    e.preventDefault();
-    web3.connect();
-  }
   return (
     <Navbar bg="success" variant="dark">
       <Container>
@@ -36,7 +30,7 @@ export default function TopBar() {
                 <Nav.Link
                   href="#refresh"
                   alt="click to refresh"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     getOgBalance();
                   }}
@@ -46,7 +40,7 @@ export default function TopBar() {
                 <Nav.Link
                   href="#refresh"
                   alt="click to refresh"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     getEthBalance();
                   }}
@@ -55,7 +49,7 @@ export default function TopBar() {
                 </Nav.Link>
                 <Nav.Link
                   href="#disconnect"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     disconnect();
                   }}
@@ -66,7 +60,7 @@ export default function TopBar() {
             ) : (
               <Nav.Link
                 href="#connect-to-metamask"
-                onClick={async e => {
+                onClick={async (e) => {
                   e.preventDefault();
                   connect();
                 }}
