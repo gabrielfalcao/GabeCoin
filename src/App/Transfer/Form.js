@@ -20,14 +20,13 @@ export default function TransferenceForm({ onClickTransfer, initialValue }) {
   const hasFunds = Number.parseInt(myCoin) <= ogBalance;
   function handleAddrChange(e) {
     const value = e.target?.value || 0;
-    myCoinRef.current.value = value;
     if (value) {
       setAddr(value);
     }
   }
   function handleMyCoinChange(e) {
     const value = e.target?.value || 0;
-    addrRef.current.value = value;
+
     if (value) {
       setMyCoin(value);
     }
@@ -69,7 +68,7 @@ export default function TransferenceForm({ onClickTransfer, initialValue }) {
         <Col>
           <Button
             disabled={!hasFunds}
-            variant="danger"
+            variant="outline-dark"
             type="submit"
             size="lg"
             onClick={handleTransfer}

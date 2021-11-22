@@ -5,8 +5,8 @@ import Form from "react-bootstrap/Form";
 import { useWeb3 } from "../Web3";
 
 export const coefficient = 1000.0;
-export const ethToMyCoin = value => Number.parseFloat(value) * coefficient;
-export const myCoinToEth = value => Number.parseFloat(value) / coefficient;
+export const ethToMyCoin = (value) => Number.parseFloat(value) * coefficient;
+export const myCoinToEth = (value) => Number.parseFloat(value) / coefficient;
 
 export default function PurchaseForm({ onClickBuy, initialValue }) {
   const { ethBalance } = useWeb3();
@@ -66,7 +66,7 @@ export default function PurchaseForm({ onClickBuy, initialValue }) {
       </Form.Group>
       <Button
         disabled={!hasFunds}
-        variant="warning"
+        variant="outline-primary"
         type="submit"
         size="lg"
         onClick={handleBuy}
